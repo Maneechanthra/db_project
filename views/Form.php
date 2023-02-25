@@ -39,7 +39,7 @@
 </head>
 <body>
 <?php
-    $sql_provinces = "SELECT * FROM provinces";
+    $sql_provinces = "SELECT * FROM `provinces` ";
     $query = mysqli_query($con, $sql_provinces);
 ?>
        

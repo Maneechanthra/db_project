@@ -25,8 +25,16 @@
 
     <!-- Custom styles for this template -->
     <link href="../assets/css/form-validation.css" rel="stylesheet">
+
+    <style>
+  
+</style>
   </head>
     <style>
+            
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500&family=Sarabun:wght@300&display=swap');
+            *{font-family: 'Sarabun', sans-serif;}
+
         .app_subsection{
             padding-top:20px; 
             color:red; 
@@ -204,7 +212,7 @@
                             <input type="text" class="form-control" id="Telephone_number" name="Telephone_number" placeholder="กรุณากรอกบ้านเลขที่" require=""> 
                         </div>
                         <div class="col-lg-4 form-group">
-                            <label style="padding-right: 10px;" for="Home_number">บอร์โทรศัพท์(บ้าน) : </label> 
+                            <label style="padding-right: 10px;" for="Home_number">เบอร์โทรศัพท์(บ้าน) : </label> 
                             <input type="text" class="form-control" id="Home_number" name="Home_number" placeholder="กรุณากรอกถนน/ซอย"> 
                         </div>
                         <div class="col-lg-4 form-group">
@@ -215,7 +223,18 @@
                             include('Form.php');
                         ?>
                         
+                        
+                      
                     </div>
+                    <div class="col-lg-6 form-group">
+                            <label style="padding-right: 10px;" for="Home_number">เบอร์โทรศัพท์(บ้าน) : </label> 
+                            <input type="text" class="form-control" id="Home_number" name="Home_number" placeholder="กรุณากรอกถนน/ซอย"> 
+                        </div>
+                    <div class="col-lg-6 form-group">
+                            <label style="padding-right: 10px;" for="email">Enail : </label> 
+                            <input type="email" class="form-control" id="email" name="email" placeholder="กรุณากรอกบ้านเลขที่"> 
+                    </div>
+                    
             </div>
    
             <!--------------------------------------------------------------------------------------------------------------------------->

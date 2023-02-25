@@ -31,13 +31,15 @@
                                         `Firstname_en` = '".$_POST['Firstname_en']."',
                                         `Province` = '".$_POST['Ref_prov_id']."',
                                         `District` = '".$_POST['Ref_dist_id']."',
-                                        `Sub_district` = '".$_POST['Ref_subdist_id']."'
+                                        `Sub_district` = '".$_POST['Ref_subdist_id']."',
+                                        `Telephone_number` = '".$_POST['Telephone_number']."'
                                         WHERE National_id = '".$_SESSION['National_id']."' ;";
         echo $update_sql;
         $mysqli->query($update_sql);
     }
     else{
-        $insert_sql = " INSERT INTO `applications` (`National_id`, `Tcas_round`, `Firstname_en`, `Birth_date`, `Religion`,`Province`,`District`,`Sub_district`) VALUES ('".$_SESSION['Ref_subdist_id']."''".$_SESSION['Ref_dist_id']."'.'".$_SESSION['Ref_prov_id']."',,'".$_SESSION['National_id']."', ".$_SESSION['Tcas_round'].", '".$_POST['Firstname_en']."', '".$_POST['birth_date']."','".$selected_religion."','".$selected_ethnicity."'  ) ";
+        $insert_sql = " INSERT INTO `applications` (`National_id`, `Tcas_round`, `Firstname_en`, `Birth_date`, `Religion`,`Province`,`District`,`Sub_district`, `Telephone_number`) 
+                        VALUES ('".$_SESSION['Ref_subdist_id']."''".$_SESSION['Ref_dist_id']."'.'".$_SESSION['Ref_prov_id']."',,'".$_SESSION['National_id']."', ".$_SESSION['Tcas_round'].", '".$_POST['Firstname_en']."', '".$_POST['birth_date']."','".$selected_religion."','".$selected_ethnicity."'.'".$_POST['Telephone_number']."' ) ";
         
         $mysqli->query($insert_sql);
     }

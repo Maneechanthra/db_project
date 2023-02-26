@@ -1,7 +1,7 @@
 <?php
     session_start();
     require('../config.php');
-    //print_r( $_SESSION['app_data'] );
+    print_r( $_SESSION['app_data2'] );
 ?>
 
 
@@ -27,6 +27,10 @@
     <link href="../assets/css/form-validation.css" rel="stylesheet">
   </head>
     <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@500&family=Sarabun:wght@300&display=swap');
+            *{font-family: 'Sarabun', sans-serif;}
+
         .app_subsection{
             padding-top:20px; 
             color:red; 
@@ -35,7 +39,6 @@
         }
     </style>
 
-<?php include('navbar.html') ?>
   <body class="container bg-light">
         
         <div class="container"></div>
@@ -57,40 +60,79 @@
       </div>
         <hr>
 
-
       <!------------------------------------------------------------------------------------------------>
         
       
       <form class="form-signin" action="../functions/major_function.php" method="POST">
+      <div>
+                        <p style="font-weight: bold;" class="lead"><?php echo isset($_SESSION['National_id']) ? "รหัสประจำตัวประชาชน หรือ Passport : ".$_SESSION['National_id'] : "ผู้สมัครใหม่";  ?></p>
+            </div>
 
-      <!------------------------------------------------------- ข้อมูลหลักสูตร ------------------------------------------------------->      
+      <!------------------------------------------------------- ข้อมูลหลักสูตร ------------------------------------------------------->  
+      
+      
      <div class="app_subsection">
                 ข้อมูลการศึกษา
             </div>
             <div class="col-lg-12 col-12 row">                    
-                <div style="margin-top: 10px;" class="col-lg-4 col-12">
+                <div style="margin-top: 10px;" class="col-lg-3 col-12">
                     ข้อมูลการเรียน :
                 </div>
-                <div style="margin-top: 10px;"  class="col-lg-8 col-12">
+                <div style="margin-top: 10px;"  class="col-lg-9 col-12">
                     <div class="col-lg-12 col-12 form-group form-inlines">                
                         <div class="col-12 input-group">
-                            <label style="padding-right: 10px;" for="School_name">โรงเรียน/สถานศึกษา : </label> 
-                            <!-- <input type="text" class="form-control" id="Province_school" name="Province_school" placeholder="กรุณากรอกจังหวัด">  -->
-                            <input style="margin-left : 10px" type="text" class="form-control" id="School_name" name="School_name" placeholder="กรุณากรอกชื่อโรงเรียน"> 
+
+
+                        <?php
+                          $sql_provinces = "SELECT * FROM `provinces` ";
+                          $query = mysqli_query($mysqli, $sql_provinces);
+                            ?>
+
+                  <?php
+                        $school_name_value = "";
+                        if( isset( $_SESSION['app_data2']['School_name'] ) ){
+                            $school_name_value = $_SESSION['app_data2']['School_name'] ; 
+                        }                    
+                    ?>   
+
+                            <label style="padding-right: 10px; " for="School_name">โรงเรียน/สถานศึกษา : </label> 
+                            <select style="font-size: 14px; text-align: center;" select class="form-control form-control-lg" name="Ref_prov_id" id="provinces">
+                                <option value="<?php echo $province_result ?>" selected disabled>-กรุณาเลือกจังหวัด-</option>
+                                <?php foreach ($query as $value) { ?>
+                                <option value="<?=$value['id']?>"><?=$value['name_th']?></option>
+                                <?php } ?>
+                            </select>
+                            <input style="margin-left : 10px; font-size: 14px; text-align: center;" type="text" class="form-control" id="School_name" name="School_name" placeholder="กรุณากรอกชื่อโรงเรียน" value="<?php echo $school_name_value ?>"> 
                         </div>
+
+                        <?php
+                        $edu_qualification_value = "";
+                        if( isset( $_SESSION['app_data2']['edu_qualification'] ) ){
+                            $edu_qualification_value = $_SESSION['app_data2']['edu_qualification'] ; 
+                        }                    
+                    ?>  
+ 
                         <div style="margin-top: 10px;" class="col-lg-12 col-12 input-group">                
                             <label for="edu_qualification">วุฒิการศึกษา : </label><br>
-                                <select class="btn btn-outline-primary btn-sm" style="margin-left : 10px; width: 230px" name="edu_qualification" id="edu_qualification">
-                                <option value="" selected disabled>-กรุณาเลือกวุฒิการศึกษา-</option> 
+                                <select class="btn btn-outline-primary btn-sm" style="margin-left : 10px; width: 230px" name="edu_qualification" id="edu_qualification" value="">
+                                <option selected disabled><?php echo $edu_qualification_value ?></option>
+                               <!-- <option value="<?php echo $edu_qualification_value ?>" selected disabled> - -กรุณาเลือกหลักสูตร-- </option>  -->
                                 <option value="ม.6">ม.6</option>      
-                                  <option value="ไทย">ปวช.</option>                          
+                                <option value="ปวช.">ปวช.</option>                          
                                 </select>
                                 
                         </div>
+
+                    <?php
+                        $stady_plan_value = "";
+                        if( isset( $_SESSION['app_data2']['stady_plan'] ) ){
+                            $stady_plan_value = $_SESSION['app_data2']['stady_plan'] ; 
+                        }                    
+                    ?> 
                         <div style="margin-top: 10px;" class="col-lg-12 col-12 input-group">                
                             <label for="stady_plan">แผนการเรียน : </label><br>
                                 <select class="btn btn-outline-primary btn-sm" style="margin-left : 10px;" name="stady_plan" id="stady_plan">
-                                <option value="" selected disabled>-กรุณาเลือกแผนการเรียน-</option> 
+                                <option value="<?php echo $stady_plan_value;?>" selected disabled>-กรุณาเลือกแผนการเรียน-</option> 
                                     <option value="วิทย์-คณิต">วิทย์-คณิต</option>
                                     <option value="ศิลป์-คำนวณ">ศิลป์-คำนวณ</option>    
                                     <option value="อาชีวศึกษา">อาชีวศึกษา</option>  
@@ -113,15 +155,16 @@
                 เลือกหลักสูตรที่ต้องการสมัคร : 
             </div>      
             <div class="col-lg-12 col-12 row">                    
-                <div style="margin-top: 10px;" class="col-lg-4 col-12">
+                <div style="margin-top: 10px;" class="col-lg-3 col-12">
                     ข้อมูลหลักสูตรการศึกษา :
                 </div>
-                <div style="margin-top: 10px;"  class="col-lg-8 col-12">
+                <div style="margin-top: 10px;"  class="col-lg-9 col-12">
                     <div class="col-lg-12 col-12 form-group form-inlines">                
                         
             <?php 
+
             
-              $sql_major = "SELECT * FROM major WHERE Facuty_id ";
+              $sql_major = "SELECT * FROM major";
               //$sql_facuty_lams = "SELECT * FROM major WHERE Facuty_id = 02  ";
               $query_major = mysqli_query($mysqli, $sql_major);
             
@@ -131,7 +174,7 @@
 
                         <div style="margin-top: 10px;" class="col-lg-12 col-12 input-group">                
                             <label for="major">หลักสูตรการศึกษา : </label><br>
-                            <select class="btn btn-outline-primary btn-sm" style="  text-align: left; margin-left : 10px;">
+                            <select name="major" id="major" class="btn btn-outline-primary btn-sm" style="  text-align: left; margin-left : 10px;" >
                             <option value="" selected disabled>-กรุณาเลือกหลักสูตร-</option> 
                             
                             <?php 
@@ -139,7 +182,7 @@
                               while( $f = mysqli_fetch_assoc( $query_major ) ) {
                                 //if($_SESSION['Facury_id'] == 02){
 
-                                  echo "<option value='".$f['Major_name']."'>".$f['Major_name']." (".$f['Major_id'].")"."</option>";
+                                  echo "<option value='".$f['Major_id']."'>".$f['Major_name']." (".$f['Major_id'].")"."</option>";
 
                                 //.}
                                // echo "<option value='".$f['Major_name']."'>".$f['Major_name']." (".$f['Major_id'].")".$f['Facuty_id'].$f['Facuty_name']."</option>";

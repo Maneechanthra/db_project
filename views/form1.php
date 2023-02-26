@@ -1,7 +1,7 @@
 <?php
     session_start();
     require('../config.php');
-    //print_r( $_SESSION['app_data'] );
+    print_r( $_SESSION['app_data'] );
 ?>
 
 
@@ -62,9 +62,22 @@
       <!------------------------------------------------------- ชื่อภาษาไทย ------------------------------------------------------->     
         <form class="form-signin" action="../functions/form1_function.php" method="POST">
         <div>
-            <div class="app_subsection">
-                ข้อมูลภาษาไทย
-            </div>      
+
+        <?php
+                        $National_value = "";
+                        if( isset( $_SESSION['app_data']['National_id'] ) ){
+                            $National_value = $_SESSION['app_data']['National_id'] ; 
+                        }                    
+                    ?>
+
+            <div>
+                        <p style="font-weight: bold;" class="lead"><?php echo isset($_SESSION['National_id']) ? "รหัสประจำตัวประชาชน หรือ Passport : ".$_SESSION['National_id'] : "ผู้สมัครใหม่";  ?></p>
+            </div>
+
+            <div>
+                <p style="color:red; font-weight:800; font-size:120%;">ข้อมูลภาษาไทย</p>
+            </div>  
+
             <div style="margin-top : 10px" class="col-lg-12 col-12 row">               
                 <div class="col-lg-4 col-12 form-group">                
                     <label for="Prefix_th">คำนำหน้า : </label>
@@ -194,31 +207,103 @@
                 <div style="margin-top: 10px;" class="col-lg-4 col-12">
                     ที่อยู่ที่สามารถติดต่อได้ :
                 </div>
-                    <div style="margin-top: 10px"  class="col-lg-12 col-12">                
+                    <div style="margin-top: 10px"  class="col-lg-12 col-12">   
+                    
+                    <?php
+                        $Home_no_value = "";
+                        if( isset( $_SESSION['app_data']['Home_no'] ) ){
+                            $Home_no_value = $_SESSION['app_data']['Home_no'] ; 
+                        }                    
+                    ?> 
+
                         <div class="col-lg-4 form-group">
                             <label style="padding-right: 10px;" for="Home_no">บ้านเลขที่ : </label> 
-                            <input type="text" class="form-control" id="Home_no" name="Home_no" placeholder="กรุณากรอกบ้านเลขที่"> 
+                            <input type="text" class="form-control" id="Home_no" name="Home_no" placeholder="กรุณากรอกบ้านเลขที่"  value="<?php echo $Home_no_value;?>">
                         </div>
+
+                    <?php
+                        $Street_value = "";
+                        if( isset( $_SESSION['app_data']['Street'] ) ){
+                            $Street_value = $_SESSION['app_data']['Street'] ; 
+                        }                    
+                    ?>     
+
                         <div class="col-lg-4 form-group">
                             <label style="padding-right: 10px;" for="Street">ถนน : </label> 
-                            <input type="text" class="form-control" id="Street" name="Street" placeholder="กรุณากรอกถนน/ซอย"> 
+                            <input type="text" class="form-control" id="Street" name="Street" placeholder="กรุณากรอกถนน/ซอย"  value="<?php echo $Street_value;?>"> 
                         </div>
+
+                    <?php
+                        $Village_no_value = "";
+                        if( isset( $_SESSION['app_data']['Village_no'] ) ){
+                            $Village_no_value = $_SESSION['app_data']['Village_no'] ; 
+                        }                    
+                    ?> 
+
                         <div class="col-lg-4 form-group">
                             <label style="padding-right: 10px;" for="Village_no">หมู่บ้าน : </label> 
-                            <input type="text" class="form-control" id="Village_no" name="Village_no" placeholder="กรุณากรอกบ้านเลขที่"> 
+                            <input type="text" class="form-control" id="Village_no" name="Village_no" placeholder="กรุณากรอกบ้านเลขที่"  value="<?php echo $Village_no_value;?>"> 
                         </div>
+                    
+                    <?php
+                        $Telephone_number_value = "";
+                        if( isset( $_SESSION['app_data']['Telephone_number'] ) ){
+                            $Telephone_number_value = $_SESSION['app_data']['Telephone_number'] ; 
+                        }                    
+                    ?>
+                     
                         <div class="col-lg-4 form-group">
                             <label style="padding-right: 10px;" for="Telephone_number">เบอร์โทรศัพท์(มือถือ) : </label> 
-                            <input type="text" class="form-control" id="Telephone_number" name="Telephone_number" placeholder="กรุณากรอกบ้านเลขที่" require=""> 
+                            <input type="text" class="form-control" id="Telephone_number" name="Telephone_number" placeholder="กรุณากรอกเบอร์โทรศัพท์(มือถือ)" value="<?php echo $Telephone_number_value;?>"> 
                         </div>
+
+                    <?php
+                        $Home_number_value = "";
+                        if( isset( $_SESSION['app_data']['Home_number'] ) ){
+                            $Home_number_value = $_SESSION['app_data']['Home_number'] ; 
+                        }                    
+                    ?>
+
                         <div class="col-lg-4 form-group">
-                            <label style="padding-right: 10px;" for="Home_number">เบอร์โทรศัพท์(บ้าน) : </label> 
-                            <input type="text" class="form-control" id="Home_number" name="Home_number" placeholder="กรุณากรอกถนน/ซอย"> 
-                        </div>
+                            <label style="padding-right: 10px;" for="Home_number">เบอร์โทรศัพท์(บ้าน) *ถ้ามี : </label> 
+                            <input type="text" class="form-control" id="Home_number" name="Home_number" placeholder="กรุณากรอกเบอร์โทรศัพท์(บ้าน)"  value="<?php echo $Home_number_value;?>"> 
+                        </div>  
+
+                    <?php
+                        $Email_value = "";
+                        if( isset( $_SESSION['app_data']['Email'] ) ){
+                            $Email_value = $_SESSION['app_data']['Email'] ; 
+                        }                    
+                    ?>
+
                         <div class="col-lg-4 form-group">
-                            <label style="padding-right: 10px;" for="email">Enail : </label> 
-                            <input type="email" class="form-control" id="email" name="email" placeholder="กรุณากรอกบ้านเลขที่"> 
+                            <label style="padding-right: 10px;" for="Email">Email : </label> 
+                            <input type="email" class="form-control" id="Email" name="Email" placeholder="กรุณากรอก Email"   value="<?php echo $Email_value;?>"> 
                         </div>
+
+                    <?php
+                        $Parents_occupation_value = "";
+                        if( isset( $_SESSION['app_data']['Parents_occupation'] ) ){
+                            $Parents_occupation_value = $_SESSION['app_data']['Parents_occupation'] ; 
+                        }                    
+                    ?>
+
+                        <div class="col-lg-6 form-group">
+                            <label style="padding-right: 10px;" for="Parents_occupation">อาชีพของผู้ปกครอง : </label> 
+                            <input type="text" class="form-control" id="Parents_occupation" name="Parents_occupation" placeholder="กรุณากรอกอาชีพของผู้ปกครอง"  value="<?php echo $Parents_occupation_value;?>"> 
+                        </div>
+
+                    <?php
+                        $Income_parents_value = "";
+                        if( isset( $_SESSION['app_data']['Income_parents'] ) ){
+                            $Income_parents_value = $_SESSION['app_data']['Income_parents'] ; 
+                        }                    
+                    ?>
+
+                    <div class="col-lg-6 form-group">
+                            <label style="padding-right: 10px;" for="Income_parents">รายได้ผู้ปกครองต่อเดือน : </label> 
+                            <input type="text" class="form-control" id="Income_parents" name="Income_parents" placeholder="กรุณากรอกรายได้ต่อเดือน"  value="<?php echo $Income_parents_value;?>"> 
+                    </div>
                         <?php 
                             include('Form.php');
                         ?>
@@ -226,14 +311,7 @@
                         
                       
                     </div>
-                    <div class="col-lg-6 form-group">
-                            <label style="padding-right: 10px;" for="Home_number">เบอร์โทรศัพท์(บ้าน) : </label> 
-                            <input type="text" class="form-control" id="Home_number" name="Home_number" placeholder="กรุณากรอกถนน/ซอย"> 
-                        </div>
-                    <div class="col-lg-6 form-group">
-                            <label style="padding-right: 10px;" for="email">Enail : </label> 
-                            <input type="email" class="form-control" id="email" name="email" placeholder="กรุณากรอกบ้านเลขที่"> 
-                    </div>
+                   
                     
             </div>
    
@@ -337,3 +415,17 @@
     </script>
   </body>
 </html>
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
